@@ -1,38 +1,35 @@
-package au.com.franky.lombokdemo;
-
-import lombok.NonNull;
+package au.com.franky.guildpresentation.data;
 
 import java.util.Objects;
 
 public class Item {
-	@NonNull private int id;
-	@NonNull private String name;
+	private final int id;
+	private final String name;
 	private String description;
 
+	public Item(int id, String name) {
+		Objects.requireNonNull(name);
+		this.id = id;
+		this.name = name;
+	}
+
 	public Item(int id, String name, String description) {
+		Objects.requireNonNull(name);
 		this.id = id;
 		this.name = name;
 		this.description = description;
 	}
 
 	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		return this.id;
 	}
 
 	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+		return this.name;
 	}
 
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
@@ -52,5 +49,9 @@ public class Item {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, name, description);
+	}
+
+	public String toString() {
+		return "Item(id=" + this.getId() + ", name=" + this.getName() + ", description=" + this.getDescription() + ")";
 	}
 }
