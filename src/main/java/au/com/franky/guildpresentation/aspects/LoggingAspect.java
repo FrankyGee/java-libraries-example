@@ -1,6 +1,5 @@
-package au.com.franky.guildpresentation.aspect;
+package au.com.franky.guildpresentation.aspects;
 
-import lombok.SneakyThrows;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -23,12 +22,9 @@ public class LoggingAspect {
 
 	private int index = 0;
 
-	@Pointcut("within(au.com.franky.guildpresentation..*)")
+//	@Pointcut("within(au.com.franky..*)")
+	@Pointcut("execution(* au.com.franky..*(..))")
 	public void allMethods() {
-	}
-
-	@Pointcut("execution(au.com.franky.guildpresentation.*.new(..))")
-	public void allConstructors() {
 	}
 
 	@Around("allMethods()")
@@ -63,15 +59,4 @@ public class LoggingAspect {
 		});
 		return cache.get(joinPoint.getArgs());
 	}
-
-
-
-	/*Object cached = cache.get(joinPoint.getArgs());
-		if (cached != null) {
-		return cached; // method is never executed at all
-	} else {
-		Object result = joinPoint.proceed();
-		cache.put(joinPoint.getArgs(), result);
-		return result;
-	}*/
 }
